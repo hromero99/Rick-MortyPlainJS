@@ -3,6 +3,10 @@
     justify-content: center;
     margin-bottom: 3em;
 }
+.button__box a{
+    display: block;
+    
+}
 .button__box__number{
     margin-left: 1em;
     margin-right: 1em;

@@ -1,13 +1,19 @@
-const URL_API = "https://rickandmortyapi.com/api/character"
 
+const buttonNextHtmlElement = document.getElementById("nextButton")
+const buttonPrevHtmlElement = document.getElementById("prevButton")
 
-const getCharacterListFromApi = async () => {
+const getCharacterListFromApi = async (URL_API) => {
 
     const response = await fetch(URL_API)
     if (response.ok){
         const caracterInformationFromApi = await response.json()
-        console.log(caracterInformationFromApi)
-        console.log(caracterInformationFromApi.results)
+        console.log(caracterInformationFromApi.info.next)
+        if (caracterInformationFromApi.info.next != null){
+            buttonNextHtmlElement.href = caracterInformationFromApi.info.next
+        }
+        if (caracterInformationFromApi.info.prev != null){
+            buttonPrevHtmlElement.href = caracterInformationFromApi.info.prev
+        }
         caracterInformationFromApi.results.map((characterInformation, index)=>{
             createCharacterCardInHtml(characterInformation)
         })
@@ -44,4 +50,37 @@ const createCharacterCardInHtml = (characterInformation) => {
 
 }
 
-getCharacterListFromApi()
+getCharacterListFromApi("https://rickandmortyapi.com/api/character")
+
+// Cuando le damos click al boton de siguiente tenemos que hacer una nueva llamada a la API
+buttonNextHtmlElement.addEventListener("click", (event) => {
+    // Evitamos que haga una redirección (comportamiento normal del elemento <a>)
+    event.preventDefault();
+    
+    // Eliminamos el contenido que tenemos ahora (no nos interesa mantenerlos todos)
+    const characterSection = document.getElementById("root");
+    
+    // Usamos forEach en lugar de map para recorrer y eliminar los elementos
+    document.querySelectorAll(".character__section article").forEach((htmlElementArticle) => {
+        characterSection.removeChild(htmlElementArticle);
+    });
+
+    getCharacterListFromApi(event.target.href)
+
+});
+
+buttonPrevHtmlElement.addEventListener("click", (event) => {
+    // Evitamos que haga una redirección (comportamiento normal del elemento <a>)
+    event.preventDefault();
+    
+    // Eliminamos el contenido que tenemos ahora (no nos interesa mantenerlos todos)
+    const characterSection = document.getElementById("root");
+    
+    // Usamos forEach en lugar de map para recorrer y eliminar los elementos
+    document.querySelectorAll(".character__section article").forEach((htmlElementArticle) => {
+        characterSection.removeChild(htmlElementArticle);
+    });
+
+    getCharacterListFromApi(event.target.href)
+
+});
