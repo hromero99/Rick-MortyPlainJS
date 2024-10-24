@@ -9,7 +9,7 @@ const getCharacterListFromApi = async () => {
         console.log(caracterInformationFromApi)
         console.log(caracterInformationFromApi.results)
         caracterInformationFromApi.results.map((characterInformation, index)=>{
-            console.log(characterInformation)
+            createCharacterCardInHtml(characterInformation)
         })
     }
     else {
@@ -25,21 +25,23 @@ const createCharacterCardInHtml = (characterInformation) => {
     const imageElement = document.createElement("img")
     imageElement.src = characterInformation.image
     const containerForText = document.createElement("div")
-    const NameCharacterTitle = docuemtn.createElement("h4")
+    const NameCharacterTitle = document.createElement("h4")
     NameCharacterTitle.innerText = characterInformation.name
     const WorldForCharacter = document.createElement("p")
-    WorldForCharacter.innerText = characterInformation.origin.name
-    const CurrentWorkd = document.createElement("p")
-    CurrentWorkd.innerText = characterInformation.location.name
+    WorldForCharacter.innerText = `Planeta: ${characterInformation.origin.name}`
+    const CurrentWorld = document.createElement("p")
+    CurrentWorld.innerText = `Localización: ${characterInformation.location.name}`
 
     containerForText.appendChild(NameCharacterTitle)
-    containerForText.appendChild(`Planeta: ${WorldForCharacter}`)
-    containerForText.appendChild(`Localización: ${CurrentWorkd}`)
+    containerForText.appendChild(WorldForCharacter)
+    containerForText.appendChild(CurrentWorld)
 
     articleContainer.appendChild(imageElement)
     articleContainer.appendChild(containerForText)
 
 
     characterSection.appendChild(articleContainer)
-    
+
 }
+
+getCharacterListFromApi()
