@@ -1,6 +1,7 @@
 .button__box{
     display: flex;
     justify-content: center;
+    margin-bottom: 3em;
 }
 .button__box__number{
     margin-left: 1em;
