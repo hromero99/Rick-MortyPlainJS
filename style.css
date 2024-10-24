@@ -1,0 +1,29 @@
+.button__box{
+    display: flex;
+    justify-content: center;
+}
+.button__box__number{
+    margin-left: 1em;
+    margin-right: 1em;
+}
+.character__section{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 2em;
+}
+
+.character_card{
+
+    padding: 1em;
+    border-width: .5em;
+    border-radius: 1em;
+    border-color: white;
+    border-style: solid;
+}
+.character_card__image{
+    width: 100%;
+}
+.characer_card__text{
+    text-align: center;
+
+}
