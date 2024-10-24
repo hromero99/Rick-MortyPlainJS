@@ -3,6 +3,7 @@ const buttonNextHtmlElement = document.getElementById("nextButton")
 const buttonPrevHtmlElement = document.getElementById("prevButton")
 
 const getCharacterListFromApi = async (URL_API) => {
+    const pageNumberText = document.getElementById("numberPage")
 
     const response = await fetch(URL_API)
     if (response.ok){
@@ -13,6 +14,11 @@ const getCharacterListFromApi = async (URL_API) => {
         }
         if (caracterInformationFromApi.info.prev != null){
             buttonPrevHtmlElement.href = caracterInformationFromApi.info.prev
+        }
+        const nummberPage = URL_API.split("page=")[1]
+        if (nummberPage != undefined){
+
+            pageNumberText.innerText = `Página ${nummberPage}`
         }
         caracterInformationFromApi.results.map((characterInformation, index)=>{
             createCharacterCardInHtml(characterInformation)
